@@ -12,7 +12,6 @@ export default function Home({posts}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav/>
-
 <main>
   <Box className={styles.container}>
     {posts.length === 0 ? (

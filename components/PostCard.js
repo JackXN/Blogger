@@ -1,25 +1,72 @@
-import {useRouter} from 'next/router';
 import {useState} from 'react';
+import {useRouter} from 'next/router';
 
-import {Box, Button, Text} from '@chakra-ui/react'; 
+export default function PostCard({post}) {
+    const [publishing, setPublishing] = useState(false);
+    const [deleting, setDeleting] = useState(false);
+    const router = useRouter();
 
-const PostCard = ({post}) => {
+// Publish a post
+const publishPost = async (postId) => {
+    // Change publishing state
+    setPublishing(true);
 
-    return (
-        <>
-        <li>
-            <Text as='h1'>{post.title}</Text>
-<Text as='p'>{post.content}</Text>
-<small>{new Date(post.createdAt).toLocaleDateString()}</small>
-        <br/>
-        <Button>{'Publish'}</Button>
-        <Button>
-            {'Delete'}
-        </Button>
-        </li>
-    </>
-    )
+    try {
+        // Update post
+        await fetch('/api/posts', {
+            method: 'PUT',
+            body: postId,
+        });
+
+        // reset the publishing state
+        setPublishing(false)
+        //reload the page
+        return router.push(router.asPath);
+    } catch(error) {
+        //Stop publishing state
+        return setPublishing(false);
+    }
 }
 
+//Delete post
+const deletePost = async (postId) => {
+    //Change deleting state
+    setDeleting(true);
+    try {
+        //Delete a post
+        await fetch('/api/posts', {
+            method: 'DELETE',
+            body: postId,
+        })
+        // reset the deleting state
+        setDeleting(false);
 
-export default PostCard;
+        //reload the page
+        return router.push(router.asPath);
+    } catch(error) {
+        //Stop deleting state
+        return setDeleting(false)
+    }
+};
+
+return (
+    <>
+    <li>
+        <h3>{post.title}</h3>
+        <p>{post.content}</p>
+<small>{new Date(post.createdAt).toLocaleDateString()}</small>
+<br/>
+{!post.published ? (
+    <button type='button' onClick={() => publishPost(post._id)}>
+        {publishing ? 'Publishing' : 'Publish'}
+    </button>
+):
+null}
+<button type='button' onClick={() => deletePost(post['_id'])}>
+    {deleting ? 'Deleting' : 'Delete'}
+</button>
+    </li>
+</>
+)
+
+}

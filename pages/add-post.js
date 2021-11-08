@@ -1,6 +1,6 @@
 import Nav from "../components/Nav";
 import {useState} from 'react';
-import styles from '.../styles/Home.module.css';
+import styles from '../styles/Home.module.css';
 import {Box, Button} from '@chakra-ui/react';
 
 const AddPost = () => {
