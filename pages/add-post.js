@@ -43,7 +43,9 @@ export default function AddPost() {
             return setMessage(data.message);
         } else {
             // set the error
+            console.log(error)
             return setError(data.message);
+        
         }
     };
 
