@@ -34,7 +34,7 @@ async function getPosts(req, res) {
             .toArray();
         return res.json({
             message: JSON.parse(JSON.stringify(posts)),
-            success: true,
+            success: "true",
         });
     } catch (error) {
         return res.json({
@@ -75,7 +75,7 @@ async function updatePost(req, res) {
 
         return res.json({
             message: 'Post updated successfully',
-            success: true,
+            success: "true",
         });
     } catch (error) {
         return res.json({
@@ -96,7 +96,7 @@ async function deletePost(req, res) {
 
         return res.json({
             message: 'Post deleted successfully',
-            success: true,
+            success: "true",
         });
     } catch (error) {
         return res.json({
