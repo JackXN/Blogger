@@ -4,6 +4,15 @@ import Nav from '../components/Nav';
 import PostCard from '../components/PostCard';
 import styles from '../styles/Home.module.css';
 
+
+
+// const posts = [{
+//     id: 1,
+//     title: 'Default Note',
+//     description: 'whoa'
+// }]
+
+
 export default function Home({ posts }) {
     return (
         <div>

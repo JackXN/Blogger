@@ -51,7 +51,7 @@ async function addPost(req, res) {
         await db.collection('posts').insertOne(JSON.parse(req.body));
         return res.json({
             message: 'Post added successfully',
-            success: true,
+            success: "true",
         });
     } catch (error) {
         return res.json({
